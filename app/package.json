@@ -1,0 +1,21 @@
+{
+  "name": "app-node",
+  "version": "1.0.0",
+  "description": "nodejs and docker",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "author": "DangTrinh",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "helmet": "^5.0.2",
+    "mongodb": "^4.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
