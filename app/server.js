@@ -25,9 +25,12 @@ async function connectData() {
 }); */
 
 router.get("/", (req, res) => {
+  res.send({ name: "dang trinh" });
+  /*0
   connectData().then((data) => {
     res.send(data);
   });
+  */
 });
 
 app.get("/favicon.ico", (req, res) => res.status(204));
@@ -35,8 +38,8 @@ app.get("/favicon.ico", (req, res) => res.status(204));
 //add the router
 app.use("/", router);
 
-const PORT = 3000;
+const PORT = 8000;
 
 app.listen(PORT, function () {
-  console.log("server run");
+  console.log(`server run in port ${PORT}`);
 });
