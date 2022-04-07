@@ -25,7 +25,7 @@ async function connectData() {
 }); */
 
 router.get("/", (req, res) => {
-  res.send({ name: "Docker on AWS with task" });
+  res.send({ name: "Docker AWS is so cool!!" });
   /*0
   connectData().then((data) => {
     res.send(data);
