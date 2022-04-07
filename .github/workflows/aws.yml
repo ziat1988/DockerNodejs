@@ -35,8 +35,9 @@ env:
   ECR_REPOSITORY: jenkin-pipeline-node # set this to your Amazon ECR repository name
   ECS_SERVICE: nodeapp-service # set this to your Amazon ECS service name
   ECS_CLUSTER: nodeapp-cluster # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: arn:aws:ecs:eu-west-3:222324859504:task-definition/nodeapp-taskname:1
-
+  ECS_TASK_DEFINITION:
+    ./task-definition.json # set this to the path to your Amazon ECS task definition
+    # file, e.g. .aws/task-definition.json
   CONTAINER_NAME:
     nodeapp-container # set this to the name of the container in the
     # containerDefinitions section of your task definition
