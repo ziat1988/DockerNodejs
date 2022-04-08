@@ -1,5 +1,14 @@
 version: '3'
 services:
+  app: 
+    build: 
+      context: .       
+    ports:
+      - 8000:8000
+    volumes:
+      - ./app:/app  
+    command: npm run watch  
+
   mongodb:
     image: mongo
     ports: 
@@ -13,6 +22,8 @@ services:
 
   mongo-express:
     image: mongo-express
+    depends_on:
+      - mongodb
     restart: always # fixes MongoNetworkError when mongodb is not ready when mongo-express starts
     ports:
       - 8081:8081
@@ -24,9 +35,6 @@ services:
 
 volumes:
   mongodata:
-    external: true 
+    driver: local
       
-
-
-
 

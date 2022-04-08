@@ -5,12 +5,16 @@ const express = require("express");
 const app = express();
 const router = express.Router();
 
+// use when starting application locally
+//let mongoUrlLocal = "mongodb://admin:password@localhost:27017";
+// use when starting application as docker container
+let mongoUrlDocker = "mongodb://admin:password@mongodb";
+
 async function connectData() {
-  const mongoUrlLocal = "mongodb://admin:password@localhost:27017";
   let databaseName = "my-test";
   const mongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 
-  const client = await MongoClient.connect(mongoUrlLocal, mongoClientOptions);
+  const client = await MongoClient.connect(mongoUrlDocker, mongoClientOptions);
 
   const db = client.db(databaseName);
   const items = await db.collection("users").find({}).toArray();
@@ -25,12 +29,10 @@ async function connectData() {
 }); */
 
 router.get("/", (req, res) => {
-  res.send({ name: "Docker AWS is so cool!!" });
-  /*0
+  /*  res.send({ name: "Node mon test3" }); */
   connectData().then((data) => {
     res.send(data);
   });
-  */
 });
 
 app.get("/favicon.ico", (req, res) => res.status(204));
