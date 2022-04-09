@@ -1,15 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
+const path = require("path");
 require("dotenv").config();
 
 const { mongoConnect } = require("./services/mongo");
 const app = express();
 
-// use when starting application locally
-//let mongoUrlLocal = "mongodb://admin:password@localhost:27017";
-// use when starting application as docker container
-//let mongoUrlDocker = "mongodb://admin:password@mongodb";
+app.use(express.json());       // to support JSON-encoded bodies
+app.use(express.urlencoded()); // to support URL-encoded bodies
+
 
 async function getData() {
   const { db } = mongoose.connection;
@@ -17,11 +16,30 @@ async function getData() {
   return items;
 }
 
+
+async function saveUser(data){
+  const { db } = mongoose.connection;
+  await db.collection("users").insertOne(data)
+
+  return "ok";
+}
+
 app.get("/", (req, res) => {
   getData().then((data) => {
     res.send(data);
   });
 });
+
+app.get("/add", (req, res) => {
+  res.sendFile(path.join(__dirname + "/views/index.html"));
+});
+
+app.post("/post-data",((req, res) => {
+  saveUser(req.body).then(data=>{
+    console.log(data)
+    res.redirect('/'); // redirect home page
+  })
+}))
 
 app.get("/favicon.ico", (req, res) => res.status(204));
 
