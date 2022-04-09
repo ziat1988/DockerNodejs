@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded()); // to support URL-encoded bodies
-
+app.use(express.static('public'));
 
 async function getData() {
   const { db } = mongoose.connection;
@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/add", (req, res) => {
-  res.sendFile(path.join(__dirname + "/views/index.html"));
+  res.sendFile(path.join(__dirname + "/public/index.html"));
 });
 
 app.post("/post-data",((req, res) => {
