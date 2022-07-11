@@ -1,14 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
-require("dotenv").config();
 
+require("dotenv").config();
+const logger = require('./logger')
 const { mongoConnect } = require("./services/mongo");
 const app = express();
 
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded()); // to support URL-encoded bodies
-app.use(express.static('public'));
+app.use('/asset', express.static(__dirname + '/public'));
 
 async function getData() {
   const { db } = mongoose.connection;
@@ -48,7 +49,7 @@ const PORT = process.env.PORT || 8000;
 async function startServer() {
   await mongoConnect();
   app.listen(PORT, function () {
-    console.log(`server run in port ${PORT}`);
+    logger.info(`server run in port ${PORT}`);
   });
 }
 
