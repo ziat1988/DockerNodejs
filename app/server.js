@@ -21,7 +21,6 @@ async function getData() {
 async function saveUser(data){
   const { db } = mongoose.connection;
   await db.collection("users").insertOne(data)
-
   return "ok";
 }
 
